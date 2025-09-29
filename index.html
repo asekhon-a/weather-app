@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>My Enhanced Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        body { background-color: #f0f4f8; } 
+        .weather-card { transition: all 0.3s ease-in-out; }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-7 col-lg-5">
+
+                <div class="card shadow-lg p-4 mb-4 bg-white rounded weather-card">
+                    <h1 class="text-center mb-4 text-primary">Global Weather 🌎</h1>
+
+                    <form method="POST" class="input-group mb-4">
+                        <input 
+                            type="text" 
+                            name="city" 
+                            placeholder="Enter city name" 
+                            required 
+                            class="form-control form-control-lg"
+                            list="city-suggestions"
+                        >
+                        <button type="submit" class="btn btn-primary btn-lg">Search</button>
+                    </form>
+                    
+                    <datalist id="city-suggestions">
+                        <option value="Durban">
+                        <option value="Berea">
+                        <option value="Kranskop">
+                        <option value="Greytown">
+                        <option value="Congella">
+                        <option value="Stanger">
+                        <option value="Mapumulo">
+                    </datalist>
+
+                    {% if error %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+
+                    {% if weather %}
+                        <div class="text-center mt-3 p-4 bg-light rounded border">
+                            <h2 class="mb-0 text-dark">{{ weather.city }}, {{ weather.country }}</h2>
+                            <p class="text-muted fst-italic">{{ weather.description }}</p>
+                            
+                            <div class="d-flex align-items-center justify-content-center my-3">
+                                <img src="http://openweathermap.org/img/wn/{{ weather.icon }}@2x.png" alt="Weather Icon" class="me-3" style="width: 80px; height: 80px;">
+                                <span class="display-2 fw-bold text-info">{{ weather.temperature }}°C</span>
+                            </div>
+
+                            <p class="text-secondary mb-4">
+                                Min: 
+                                <strong class="text-success">{{ weather.temp_min }}°C</strong> | 
+                                Max: 
+                                <strong class="text-danger">{{ weather.temp_max }}°C</strong>
+                            </p>
+
+                            <div class="row text-center border-top pt-3">
+                                <div class="col-6">
+                                    <p class="mb-1 text-muted">Humidity 💧</p>
+                                    <p class="h4 text-primary">{{ weather.humidity }}%</p>
+                                </div>
+                                <div class="col-6">
+                                    <p class="mb-1 text-muted">Wind Speed 🌬️</p>
+                                    <p class="h4 text-primary">{{ weather.wind_speed }} km/h</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
